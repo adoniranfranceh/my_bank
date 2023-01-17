@@ -37,7 +37,7 @@ class Account
       self.withdraw(value) 
       account_recipient.deposit(value)
       puts "Valor adicionado "
-      puts "$#{account_recipient.balance}"
+      puts "$#{value}"
     else 
       puts "Valor indisponível"
     end
@@ -47,7 +47,7 @@ class Account
     ACCOUNTS
   end
 
-  def self.find_by_number(number) 
+  def self.find_by_number(number) #3
     ACCOUNTS.each do |account|
       return account if account.number == number 
     end
@@ -55,15 +55,7 @@ class Account
     nil 
   end
 
-  def authenticate(number, password)
-    if @number == number
-      return 0 if @password == password
-      
-      puts "senha incorreta"
-    else
-      puts "conta inexistente"
-    end
-  end
+
 
   def information
     puts "Algumas informações sobre sua conta"

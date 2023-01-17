@@ -41,8 +41,12 @@ loop do
     
     accounts = Account.all
     accounts.each do |account|
-      get_inside = account.authenticate(number, password)
-      if get_inside == 0
+      if account.number == number
+        if account.password == password
+          get_inside = true
+        end
+      end
+      if get_inside 
         loop do 
           puts "Olá #{account.name}\n"
           puts ' ->->->-> MENU DA CONTA ->->->->'
@@ -66,8 +70,7 @@ loop do
             choice = gets.chomp.to_i
             puts "Digite o valor"
             value = gets.chomp.to_i
-            accounts = Account.all
-
+            
             account = Account.find_by_number(choice)
 
             account.deposit(value) 
@@ -77,30 +80,29 @@ loop do
 
           when 2
             puts "Digite o número da conta destino\n"
-            recipient = gets.chomp.to_i
+            recipient = gets.chomp.to_i 
             puts "Digite o valor que deseja enviar\n"
-            value = gets.chomp.to_i
+            value = gets.chomp.to_i 
             puts "Digite o número da conta remetente"
-            sender = gets.chomp.to_i
+            sender = gets.chomp.to_i 
             system'clear'
             accounts = Account.all
 
-            account_sender = Account.find_by_number(sender)
-            account_recipient = Account.find_by_number(recipient)
+            account_sender = Account.find_by_number(sender) 
+            account_recipient = Account.find_by_number(recipient) 
 
-            account.transfer_value_for(account_recipient, value)
+            account.transfer_value_for(account_recipient, value) 
           when 3 
-            puts "Quanto deseja sacar?"
-            value = gets.chomp.to_i
-
+            
             puts "Digite o número da conta"
             choice = gets.chomp.to_i
-            
-            accounts = Account.all
+            puts "Quanto deseja sacar?"
+            value = gets.chomp.to_i
 
             account = Account.find_by_number(choice)
 
             account.withdraw(value) 
+
             puts "Valor retirado: $#{value} \n"
             puts "Valor total:" 
             puts "$#{account.balance}"
