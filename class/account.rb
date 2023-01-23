@@ -47,7 +47,7 @@ class Account
     ACCOUNTS
   end
 
-  def self.find_by_number(number) #3
+  def self.find_by_number(number) 
     ACCOUNTS.each do |account|
       return account if account.number == number 
     end
